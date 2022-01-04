@@ -39,13 +39,17 @@ fi
 echo " secret为 $secret"
 
 read -p "是否添加广告频道[y/n]：" AD
-if [[ $AD=~ y|Y ]];then
-	read -p "请输入频道TAG：" tag
+if [[ $AD=~ "y"|"Y" ]];then
+  echo "请将 $ip:$port"
+  echo "secret: $secret"
+  echo "发送给 @MTProxybot 以获取推广tag"
+  echo ""
+  read -p "请输入频道TAG：" tag
   docker pull telegrammessenger/proxy
   docker run -d -p$port:443 --name=mtproto-proxy --restart=always -v proxy-config:/data -e SECRET=$secret TAG=$tag telegrammessenger/proxy:latest
 
 else
-	docker pull telegrammessenger/proxy
+  docker pull telegrammessenger/proxy
   docker run -d -p$port:443 --name=mtproto-proxy --restart=always -v proxy-config:/data -e SECRET=$secret telegrammessenger/proxy:latest
 
 fi
