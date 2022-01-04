@@ -29,6 +29,7 @@ else
   port=443
 fi
 echo "端口为 $port"
+echo ""
 
 read -p "请设置secret（回车自动生成）：" SECRET
 if [[ -n $SECRET ]];then
@@ -37,13 +38,19 @@ else
   secret=$hex
 fi
 echo "secret为 $secret"
+echo ""
 
-echo "请将 $ip:$port"
-echo "secret: $secret"
-echo "发送给 @MTProxybot 以获取推广tag"
-
-read -p "请输入刚才获取的推广tag: " tag
+read -p "是否使用自带tag[y/n]:" TAG
+if [[ "$TAG" =~ y|Y ]];then
+  tag=760d7bfb68e833b3c2dded5d67a8fac6
+else
+  echo "请将 $ip:$port"
+  echo "secret: $secret"
+  echo "发送给 @MTProxybot 以获取推广tag"
+  read -p "请输入推广 tag：" tag
+fi
 echo "推广tag为 $tag"
+echo ""
 
 docker pull seriyps/mtproto-proxy
 docker run -d --name=mtproto --network=host seriyps/mtproto-proxy -p $port -s $secret -t $tag -a dd -a tls
