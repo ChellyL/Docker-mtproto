@@ -39,7 +39,7 @@ fi
 echo " secret为 $secret"
 
 read -p "是否添加广告频道[y/n]：" AD
-if [[ $AD=~ "y"|"Y" ]];then
+if [[ "$AD"=~ y|Y ]];then
   echo "请将 $ip:$port"
   echo "secret: $secret"
   echo "发送给 @MTProxybot 以获取推广tag"
