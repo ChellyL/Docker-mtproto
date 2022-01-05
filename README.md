@@ -20,7 +20,7 @@ https://raw.githubusercontent.com/ChellyL/Docker-mtproto/main/go_mtg.sh
 ```
 
 
-- nginx_mtproxy我个人认为最安全，除了tls、安全链接外，无需tag，还支持ip白名单模式，减少ip被ban的几率，不过使用稍微麻烦一点点
+- nginx_mtproxy我个人认为最安全，除了tls、安全链接外，无需tag，还支持ip白名单模式，减少ip被ban的几率，不过使用稍微麻烦一点点；由于使用了nginx，443端口不能被占用
 ```
 https://raw.githubusercontent.com/ChellyL/Docker-mtproto/main/nginx_mtproxy.sh 
 ```
