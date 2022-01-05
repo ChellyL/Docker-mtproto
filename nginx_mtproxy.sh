@@ -84,7 +84,7 @@ fi
 
 
 docker pull ellermister/nginx-mtproxy
-docker run --name nginx-mtproxy -d -e secret="$secret" -e domain="$domain" -e tag="$tag" -e ip_white_list=$white -p $port1:8660 -p $port2:22443 ellermister/nginx-mtproxy:latest
+docker run --name nginx-mtproxy -d -e secret="$secret" -e domain="$domain" -e tag="$tag" -e ip_white_list=$white -p $port1:80 -p $port2:443 ellermister/nginx-mtproxy:latest
 
 sleep 4
 
