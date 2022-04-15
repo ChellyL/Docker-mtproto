@@ -14,7 +14,7 @@ wget https://raw.githubusercontent.com/ChellyL/Docker-mtproto/main/tg_offical.sh
 wget https://raw.githubusercontent.com/ChellyL/Docker-mtproto/main/erlang_mtproto.sh && bash erlang_mtproto.sh
 ```
 
-- go_mtg是用go写的，同样支持tls，无需tag，简单快捷
+- go_mtg是用go写的，同样支持tls，无需tag，简单快捷 [**推荐！**]
 ```
 wget https://raw.githubusercontent.com/ChellyL/Docker-mtproto/main/go_mtg.sh && bash go_mtg.sh
 ```
