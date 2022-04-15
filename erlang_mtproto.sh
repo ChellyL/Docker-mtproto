@@ -13,6 +13,7 @@ echo "前序准备ing"
 
 apt update
 apt install docker
+docker rm -f mtproto
 apt install docker-compose
 
 ip=$(curl -4 ip.sb)
@@ -22,7 +23,7 @@ echo ""
 echo "准备完毕～"
 echo ""
 
-read -p "请设置端口（1-65535）（回车随机生成）：" PORT
+read -p "请设置端口（1-65535）（默认随机生成）：" PORT
 if [[ -n $PORT ]];then
   port=$PORT
 else
@@ -40,29 +41,26 @@ fi
 echo "secret为 $secret"
 echo ""
 
-read -p "是否添加 推广tag(不知道是啥就不用加这个) [y/n]:" TAG
+read -p "是否使用自带tag[y/n](回车默认空tag):" TAG
 if [[ "$TAG" =~ y|Y ]];then
   echo "请将 $ip:$port"
   echo "secret: $secret"
   echo "发送给 @MTProxybot 以获取推广tag"
   read -p "请输入推广 tag：" tag
-  echo "推广tag为 $tag"
 else
-  tag='dcbe8f1493fa4cd9ab300891c0b5b326'
-  echo "不添加ad tag"
+  tag=760d7bfb68e833b3c2dded5d67a8fac6
 fi
+echo "推广tag为 $tag"
 echo ""
 
 docker pull seriyps/mtproto-proxy
 docker run -d --name=mtproto --network=host seriyps/mtproto-proxy -p $port -s $secret -t $tag -a dd
-
-echo "链接为 tg://proxy?server=$ip&port=$port&secret=dd$secret"
-echo "或 tg://proxy?server=$ip&port=$port&secret=ee$secret$tag"
+echo "链接为 https://t.me/proxy?server=$ip&port=$port&secret=dd$secret"
+echo ""
 echo ""
 echo "链接可在本目录的 mtp.txt 中查看"
 cat > ./mtp.txt << EOF
-tg://proxy?server=$ip&port=$port&secret=dd$secret
-tg://proxy?server=$ip&port=$port&secret=ee$secret$tag
+https://t.me/proxy?server=$ip&port=$port&secret=dd$secret
 EOF
 
 
