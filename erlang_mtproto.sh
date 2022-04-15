@@ -22,7 +22,7 @@ echo ""
 echo "准备完毕～"
 echo ""
 
-read -p "请设置端口（1-65535）（默认随机生成）：" PORT
+read -p "请设置端口（1-65535）（回车随机生成）：" PORT
 if [[ -n $PORT ]];then
   port=$PORT
 else
@@ -40,20 +40,26 @@ fi
 echo "secret为 $secret"
 echo ""
 
-read -p "是否使用自带tag[y/n]:" TAG
+read -p "是否添加 推广tag(不知道是啥就不用加这个) [y/n]:" TAG
 if [[ "$TAG" =~ y|Y ]];then
-  tag=760d7bfb68e833b3c2dded5d67a8fac6
-else
   echo "请将 $ip:$port"
   echo "secret: $secret"
   echo "发送给 @MTProxybot 以获取推广tag"
   read -p "请输入推广 tag：" tag
+  echo "推广tag为 $tag"
+else
+  tag=''
+  echo "不添加ad tag"
 fi
-echo "推广tag为 $tag"
 echo ""
 
 docker pull seriyps/mtproto-proxy
-docker run -d --name=mtproto --network=host seriyps/mtproto-proxy -p $port -s $secret -t $tag -a dd -a tls
+if [[ -n $tag ]];then
+  docker run -d --name=mtproto --network=host seriyps/mtproto-proxy -p $port -s $secret -t $tag -a dd -a tls
+else 
+  docker run -d --name=mtproto --network=host seriyps/mtproto-proxy -p $port -s $secret -a dd -a tls
+fi
+
 echo "链接为 tg://proxy?server=$ip&port=$port&secret=dd$secret"
 echo "或 tg://proxy?server=$ip&port=$port&secret=ee$secret$tag"
 echo ""
