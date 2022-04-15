@@ -22,11 +22,11 @@ echo "准备完毕～"
 echo ""
 
 
-read -p "请设置端口（1-65535）（默认 443）：" PORT
+read -p "请设置端口（1-65535）（默认随机生成）：" PORT
 if [[ -n $PORT ]];then
   port=$PORT
 else
-  port=443
+  port=$RANDOM
 fi
 echo "https端口为 $port"
 echo ""
