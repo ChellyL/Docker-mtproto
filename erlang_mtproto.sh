@@ -48,17 +48,13 @@ if [[ "$TAG" =~ y|Y ]];then
   read -p "请输入推广 tag：" tag
   echo "推广tag为 $tag"
 else
-  tag=''
+  tag='dcbe8f1493fa4cd9ab300891c0b5b326'
   echo "不添加ad tag"
 fi
 echo ""
 
 docker pull seriyps/mtproto-proxy
-if [[ -n $tag ]];then
-  docker run -d --name=mtproto --network=host seriyps/mtproto-proxy -p $port -s $secret -t $tag -a dd
-else 
-  docker run -d --name=mtproto --network=host seriyps/mtproto-proxy -p $port -s $secret -a dd
-fi
+docker run -d --name=mtproto --network=host seriyps/mtproto-proxy -p $port -s $secret -t $tag -a dd
 
 echo "链接为 tg://proxy?server=$ip&port=$port&secret=dd$secret"
 echo "或 tg://proxy?server=$ip&port=$port&secret=ee$secret$tag"
