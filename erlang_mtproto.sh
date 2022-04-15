@@ -55,9 +55,9 @@ echo ""
 
 docker pull seriyps/mtproto-proxy
 if [[ -n $tag ]];then
-  docker run -d --name=mtproto --network=host seriyps/mtproto-proxy -p $port -s $secret -t $tag -a dd -a tls
+  docker run -d --name=mtproto --network=host seriyps/mtproto-proxy -p $port -s $secret -t $tag -a dd
 else 
-  docker run -d --name=mtproto --network=host seriyps/mtproto-proxy -p $port -s $secret -a dd -a tls
+  docker run -d --name=mtproto --network=host seriyps/mtproto-proxy -p $port -s $secret -a dd
 fi
 
 echo "链接为 tg://proxy?server=$ip&port=$port&secret=dd$secret"
