@@ -42,14 +42,14 @@ echo "伪装访问网址为 $domain"
 echo ""
 
 secret=$(docker run --rm nineseconds/mtg:master generate-secret --hex $domain)
-cat > /etc/mtg.toml << EOF
+cat > /etc/mtg-config.toml << EOF
 secret = "$secret"
 bind-to = "0.0.0.0:3128"
 EOF
 
 # docker pull ellermister/nginx-mtproxy
 docker rm -f mtg
-docker run -d --name mtg -v /etc/mtg.toml:/config.toml -p $port:3128 --restart=always nineseconds/mtg:latest
+docker run -d --name mtg -v /etc/mtg-config.toml:/config.toml -p $port:3128 --restart=always nineseconds/mtg:1.0
 echo ""
 echo "tg://proxy?server=$ip&port=$port&secret=$secret"
 
