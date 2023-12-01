@@ -47,7 +47,7 @@ secret = "$secret"
 bind-to = "0.0.0.0:3128"
 EOF
 
-docker pull ellermister/nginx-mtproxy
+# docker pull ellermister/nginx-mtproxy
 docker rm -f mtg
 docker run -d --name mtg -v /etc/mtg.toml:/config.toml -p $port:3128 --restart=always nineseconds/mtg:latest
 echo ""
