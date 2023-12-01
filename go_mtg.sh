@@ -42,7 +42,7 @@ echo "伪装访问网址为 $domain"
 echo ""
 
 secret=$(docker run --rm nineseconds/mtg:master generate-secret --hex $domain)
-cat > /etc/mtg-config.toml << EOF
+cat > /etc/mtg.toml << EOF
 secret = "$secret"
 bind-to = "0.0.0.0:3128"
 EOF
