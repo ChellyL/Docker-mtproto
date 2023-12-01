@@ -49,7 +49,7 @@ EOF
 
 docker pull ellermister/nginx-mtproxy
 docker rm -f mtg
-docker run -d --name mtg -v /etc/mtg-config.toml:/config.toml -p $port:3128 --restart=always nineseconds/mtg:master
+docker run -d --name mtg -v /etc/mtg.toml:/config.toml -p $port:3128 --restart=always nineseconds/mtg:2
 echo ""
 echo "tg://proxy?server=$ip&port=$port&secret=$secret"
 
